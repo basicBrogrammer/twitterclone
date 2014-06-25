@@ -3,7 +3,7 @@
 <div class="row">
   <div class="large-12 columns">
 
-    <h1>TiY on Rails. It's Awesome!</small></h1>
+    <h1>TiY on Rails. It's Awesome!</h1>
     <hr/>
   </div>
 </div>
@@ -28,6 +28,19 @@
 
 
   <aside class="large-3 columns">
+    <% if sign_in? %>
+        <%=  @user.show %>
+     <% else %>
+        <div class="panel">
+            <%= form_for(:session, url: sessions_path) do |f| %>
+              <%= f.text_field :email, placeholder: "email" %>
+              <%= f.password_field :password, placeholder: "password" %>
+
+              <%= f.submit "Sign In", class: "round button" %>
+            <% end %>
+
+        </div>
+    <% end %>
 
     <div class="panel">
       <p>New to Tiy on Rails? Sign up</p>
