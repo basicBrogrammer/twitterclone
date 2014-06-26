@@ -4,7 +4,7 @@
   <div class="large-12 columns">
     <div class="nav-bar right">
       <ul>
-        <li class="round tiny button"> <%=link_to "Home", user_path %> </li>
+        <li class="round tiny button"> <%=link_to "Home", current_user %> </li>
         <li class="round tiny button"><%=link_to "Fellow TiYers", users_path %> </li>
         <li class="round tiny button"><%=link_to "Settings", edit_user_path %></li>
         <li class="round tiny button"><%=link_to "Sign Out", session_path, method: "delete" %></li>
