@@ -2,57 +2,36 @@
 
 <div class="row">
   <div class="large-12 columns">
+    <div class="nav-bar right">
+      <ul>
+        <li class="round tiny button"> <%=link_to "Home", current_user %> </li>
+        <li class="round tiny button"><%=link_to "Fellow TiYers", users_path %> </li>
 
-    <h1>TiY on Rails. It's Awesome!</h1>
+      </ul>
+    </div>
+    <h2>Tiy on Rails!</h2>
     <hr/>
   </div>
 </div>
 
-
-
-
-
-
 <div class="row">
+  <div class="large-8 columns">
+    <% @users.each do |user| %>
+        <ul>
+          <li><%= gravatar_for(user) %></li>
+          <li><%= user.name%></li>
+          <li><%= user.username %></li>
 
 
-  <div class="large-9 columns" role="content">
+        </ul>
+          <hr>
 
-    <%= image_tag "homepage.jpg" %>
+
+    <% end %>
 
   </div>
 
-
-
-
-
-
-  <aside class="large-3 columns">
-    <% if sign_in? %>
-        <%=  @user.show %>
-     <% else %>
-        <div class="panel">
-            <%= form_for(:session, url: sessions_path) do |f| %>
-              <%= f.text_field :email, placeholder: "email" %>
-              <%= f.password_field :password, placeholder: "password" %>
-
-              <%= f.submit "Sign In", class: "round button" %>
-            <% end %>
-
-        </div>
-    <% end %>
-
-    <div class="panel">
-      <p>New to Tiy on Rails? Sign up</p>
-      <%= render "form" %>
-    </div>
-
-  </aside>
-
-
 </div>
-
-
 
 
 

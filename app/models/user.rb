@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :posts
   #before the User email is saved the email is transformed to all lowercase letters
   before_save {self.email = email.downcase}
   before_create :create_remember_token
