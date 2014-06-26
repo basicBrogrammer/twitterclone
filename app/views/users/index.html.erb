@@ -18,10 +18,11 @@
   <div class="large-8 columns">
     <% @users.each do |user| %>
         <ul>
+          <a href=" <%= user_path user %>">
           <li><%= gravatar_for(user) %></li>
-          <li><%= user.name%></li>
+          <li><%=  user.name %></li>
           <li><%= user.username %></li>
-
+          </a>
 
         </ul>
           <hr>

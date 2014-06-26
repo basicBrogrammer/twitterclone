@@ -12,6 +12,10 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+   current_user
+    @post = @user.posts.build if sign_in?
+    @posts = Post.all
+
   end
 
   def home
@@ -70,6 +74,7 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+
     end
 
 
@@ -80,9 +85,7 @@ class UsersController < ApplicationController
     end
     # this requires the user to be signed in to access certain pages
 
-  def user_sign_in
-    redirect_to root_url, notice: "Please sign in first" unless sign_in?
-  end
+
   #this makes sure the user accessing edit and update are the correct user
   def correct_user
     @user =User.find(params[:id])

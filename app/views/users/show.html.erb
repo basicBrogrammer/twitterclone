@@ -35,66 +35,49 @@
 
 
     <ul class="inline-list">
-      <li>XX<a href="#">Posts</a></li>
-      <li>XX<a href="#">Followers</a></li>
-      <li>XX<a href="#">Following</a></li>
+      <li><%= @user.posts.count %> <br> Posts</li>
+      <li><%= @user.followed_users.count %><br><%= link_to "Following", following_user_path(@user)%></li>
+      <li><%= @user.followers.count %><br><%= link_to "Followers", followers_user_path(@user) %></li>
 
     </ul>
 
-    <div class="panel">
-      <h5>Featured</h5>
-      <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.</p>
-      <a href="#">Read More →</a>
-    </div>
+    <%= form_for (@post) do |f| %>
+        <%= f.text_field :content, placeholder: "Put a Ruby on TiY Rails" %>
+        <%= f.submit "Post", class: "round tiny button" %>
+        <% end %>
 
   </aside>
 
 
   <div class="large-9 columns" role="content">
-
-    <article>
-
-      <h3><a href="#">Blog Post Title</a></h3>
-      <h6>Written by <a href="#">John Smith</a> on August 12, 2012.</h6>
-
-      <div class="row">
-        <div class="large-6 columns">
-          <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa.</p>
-          <p>Boudin aliqua adipisicing rump corned beef. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+    <% unless current_user?(@user) %>
+        <div id="follow_form">
+          <% if current_user.following?(@user) %>
+              <%= form_for(current_user.relationships.find_by(followed_id: @user.id),
+                           html: { method: :delete }) do |f| %>
+                  <%= f.submit "Unfollow"%>
+              <% end %>
+          <% else %>
+              <%= form_for(current_user.relationships.build(followed_id: @user.id)) do |f| %>
+                  <div><%= f.hidden_field :followed_id %></div>
+                  <%= f.submit "Follow" %>
+              <% end %>
+          <% end %>
         </div>
-        <div class="large-6 columns">
-          <img src="http://placehold.it/400x240&text=[img]"/>
-        </div>
-      </div>
+    <% end %>
 
-      <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+    <% @user.posts.find_each do |post| %>
+        <ul>
+          <li><%= @user.username %></li>
+          <li><%= post.content%></li>
 
-      <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
 
-    </article>
 
-    <hr/>
+        </ul>
+        <hr>
 
-    <article>
 
-      <h3><a href="#">Blog Post Title</a></h3>
-      <h6>Written by <a href="#">John Smith</a> on August 12, 2012.</h6>
-
-      <div class="row">
-        <div class="large-6 columns">
-          <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa.</p>
-          <p>Boudin aliqua adipisicing rump corned beef. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
-        </div>
-        <div class="large-6 columns">
-          <img src="http://placehold.it/400x240&text=[img]"/>
-        </div>
-      </div>
-
-      <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
-
-      <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
-
-    </article>
+    <% end %>
 
   </div>
 
