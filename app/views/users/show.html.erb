@@ -4,8 +4,8 @@
   <div class="large-12 columns">
     <div class="nav-bar right">
       <ul>
-        <li class="round tiny button"> <%=link_to "Home", current_user %> </li>
-        <li class="round tiny button"><%=link_to "Fellow TiYers", users_path %> </li>
+        <li class="round tiny button"><%=link_to "Home", current_user %></li>
+        <li class="round tiny button"><%=link_to "Fellow TiYers", users_path %></li>
         <li class="round tiny button"><%=link_to "Settings", edit_user_path %></li>
         <li class="round tiny button"><%=link_to "Sign Out", session_path, method: "delete" %></li>
 
@@ -21,7 +21,7 @@
 
 
 
-<div class="row">
+<div class="row feed">
   <aside class="large-3 columns">
 
 
@@ -67,13 +67,12 @@
     <% end %>
     <h2>Rubys Riding TiY Rails</h2>
     <% @user.posts.find_each do |post| %>
-        <ul>
-          <li><%= @user.username %></li>
-          <li><%= post.content%></li>
-
-
-
+        <ul class="inline-list">
+          <li> <strong><%= @user.name %></strong></li>
+          <li>  @<%= @user.username %> </li>
+          <li>  <%= time_ago_in_words(post.created_at)%> </li>
         </ul>
+        <div class="feed-content"><%= post.content %></div>
         <hr>
 
 
@@ -96,22 +95,5 @@
 
 
 
-<footer class="row">
-  <div class="large-12 columns">
-    <hr/>
-    <div class="row">
-      <div class="large-6 columns">
-        <p>© Copyright no one at all. Go to town.</p>
-      </div>
-      <div class="large-6 columns">
-        <ul class="inline-list right">
-          <li><a href="#">Link 1</a></li>
-          <li><a href="#">Link 2</a></li>
-          <li><a href="#">Link 3</a></li>
-          <li><a href="#">Link 4</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</footer>
+
     
