@@ -14,23 +14,18 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="large-8 columns">
+<div class="row fellow-railers">
+  <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
     <% @users.each do |user| %>
-        <ul>
-          <a href=" <%= user_path user %>">
-          <li><%= gravatar_for(user) %></li>
-          <li><%=  user.name %></li>
-          <li><%= user.username %></li>
-          </a>
-
-        </ul>
-          <hr>
-
+          <li><%= link_to gravatar_for(user), user %>
+            <p><%=  user.name %><br>
+            <%= user.username %></p>
+          </li>
 
     <% end %>
+  </ul>
+  <%= paginate @users %>
 
-  </div>
 
 </div>
 

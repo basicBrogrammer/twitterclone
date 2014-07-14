@@ -6,7 +6,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+
+    @users = User.order(:name).page params[:page]
   end
 
   # GET /users/1
@@ -19,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   def home
+    redirect_to current_user if !current_user.nil?
     @user = User.new
   end
 
@@ -77,18 +79,20 @@ class UsersController < ApplicationController
 
     end
 
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-    # password and password_confirmation must be added to all the input from http
-    def user_params
-      params.require(:user).permit(:name, :username, :email, :password, :password_confirmation)
-    end
-    # this requires the user to be signed in to access certain pages
-
+  def user_sign_in
+    redirect_to signin_url, notice: "Please sign in." unless signed_in?
+  end
 
   #this makes sure the user accessing edit and update are the correct user
   def correct_user
     @user =User.find(params[:id])
     redirect_to (root_url) unless current_user?(@user)
   end
+  # Never trust parameters from the scary internet, only allow the white list through.
+    # password and password_confirmation must be added to all the input from http
+    def user_params
+      params.require(:user).permit(:name, :username, :email, :password, :password_confirmation)
+    end
+
+
 end

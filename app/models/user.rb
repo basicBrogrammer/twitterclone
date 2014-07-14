@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  paginates_per 20
   has_many :posts, dependent: :destroy
   #following using the follower_id
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -25,6 +26,9 @@ class User < ActiveRecord::Base
   #automatically. I have had problems with this being the case.
   has_secure_password
   validates :password, length: { minimum: 6 }
+
+
+
 
   #creates a secured 16 digit hashed remember token
   def User.new_remember_token
