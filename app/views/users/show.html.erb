@@ -55,28 +55,19 @@
           <% if current_user.following?(@user) %>
               <%= form_for(current_user.relationships.find_by(followed_id: @user.id),
                            html: { method: :delete }) do |f| %>
-                  <%= f.submit "Unfollow"%>
+                  <%= f.submit "Unfollow", class: "tiny round button" %>
               <% end %>
           <% else %>
               <%= form_for(current_user.relationships.build(followed_id: @user.id)) do |f| %>
                   <div><%= f.hidden_field :followed_id %></div>
-                  <%= f.submit "Follow" %>
+                  <%= f.submit "Follow", class: "tiny round button"  %>
               <% end %>
           <% end %>
         </div>
     <% end %>
     <h2>Rubys Riding TiY Rails</h2>
-    <% @user.posts.find_each do |post| %>
-        <ul class="inline-list">
-          <li> <strong><%= @user.name %></strong></li>
-          <li>  @<%= @user.username %> </li>
-          <li>  <%= time_ago_in_words(post.created_at)%> </li>
-        </ul>
-        <div class="feed-content"><%= post.content %></div>
-        <hr>
+    <%= render 'shared/feed' %>
 
-
-    <% end %>
 
   </div>
 

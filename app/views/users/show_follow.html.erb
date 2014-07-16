@@ -1,0 +1,56 @@
+<% provide(:title, @title) %>
+
+<div class="row">
+  <div class="large-12 columns">
+    <div class="nav-bar right">
+      <ul>
+        <li class="round tiny button"><%=link_to "Home", current_user %></li>
+        <li class="round tiny button"><%=link_to "Fellow TiYers", users_path %></li>
+        <li class="round tiny button"><%=link_to "Settings", edit_user_path %></li>
+        <li class="round tiny button"><%=link_to "Sign Out", session_path, method: "delete" %></li>
+
+      </ul>
+    </div>
+    <h2>Tiy on Rails!</h2>
+    <hr/>
+  </div>
+</div>
+
+<div class="row feed">
+  <aside class="large-4 columns ">
+    <section>
+      <%= gravatar_for @user %>
+      <h1><%= @user.name %></h1>
+
+    </section>
+    <section>
+      <ul class="inline-list">
+        <li><%= @user.posts.count %> <br> Posts</li>
+        <li><%= @user.followed_users.count %><br><%= link_to "Following", following_user_path(@user)%></li>
+        <li><%= @user.followers.count %><br><%= link_to "Followers", followers_user_path(@user) %></li>
+
+      </ul>
+      <% if @users.any? %>
+          <div class="user_avatars">
+            <% @users.each do |user| %>
+                <%= link_to gravatar_for(user), user %>
+            <% end %>
+          </div>
+      <% end %>
+    </section>
+  </aside>
+  <div class="large-8 columns">
+    <h3><%= @title %></h3>
+    <% if @users.any? %>
+        <% @users.each do |user| %>
+        <ul class="inline-list">
+
+              <li><%= link_to gravatar_for(user,30), user %> </li>
+              <li><%= link_to user.name %> </li>
+
+        </ul>
+        <% end %>
+        <%= paginate @users %>
+    <% end %>
+  </div>
+</div>

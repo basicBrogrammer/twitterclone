@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   #following using the follower_id
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   #because followeds seems weird we us followed_users and have to explictly state the source is :followed
-  has_many :followed_users, through: :relationships, class_name: "Relationship", source: :followed
+  has_many :followed_users, through: :relationships, source: :followed
   #followers
   has_many :reverse_relationships, foreign_key: "followed_id",class_name: "Relationship", dependent: :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
@@ -51,6 +51,13 @@ class User < ActiveRecord::Base
   def unfollow!(other_user)
     relationships.find_by(followed_id: other_user.id).destroy
   end
+
+  def feed
+    # This is preliminary. See "Following users" for the full implementation.
+    Post.where("user_id = ?", id)
+  end
+
+
 
   private
 

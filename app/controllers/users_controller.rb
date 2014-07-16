@@ -10,13 +10,31 @@ class UsersController < ApplicationController
     @users = User.order(:name).page params[:page]
   end
 
+  def feed
+    Post.from_users_followed_by(current_user)
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show
-   current_user
-    @post = @user.posts.build if sign_in?
-    @posts = Post.all
+    current_user
+    @post = current_user.posts.build if sign_in?
+    @feed_items = current_user.feed.page params[:page]
 
+  end
+
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.followed_users.page(params[:page]).per(15)
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.page params[:page]
+    render 'show_follow'
   end
 
   def home

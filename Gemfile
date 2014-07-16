@@ -41,3 +41,7 @@ gem 'spring',        group: :development
  gem 'foundation-rails'
   gem 'faker'
 gem 'kaminari'
+group :development do
+  gem "better_errors"
+  # gem "binding_of_caller"
+end
