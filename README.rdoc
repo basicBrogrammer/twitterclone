@@ -1,28 +1,33 @@
-== README
+== README- TiY on Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app is a twitter clone. It was the first rails app that I personally did from start to finish.
+It was a great learning experience.
 
-Things you may want to cover:
+How to run:
+clone the repository.
+Run:
+    * bundle install
+    * rake db:migrate
+    * rake db:populate (for sample data)
+    * rails server
+    * open localhost:3000 in browser
 
-* Ruby version
 
-* System dependencies
+Concepts learned:
 
-* Configuration
+* User authentication -  Bcrypt, has_secure_password
 
-* Database creation
+* Associations - has_many, belongs_to, has_many :through
+
+* MVC arhitectural pattern
+
+* Sessions -cache
 
 * Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Todo list:
+    * fine tuning
 
 
-Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.

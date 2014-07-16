@@ -22,8 +22,9 @@
 
 
 <div class="row feed">
-  <aside class="large-3 columns">
 
+  <aside class="large-3 columns">
+    <div class="panel">
 
 
        <%= gravatar_for @user %>
@@ -45,11 +46,13 @@
         <%= f.text_field :content, placeholder: "Put a Ruby on TiY Rails" %>
         <%= f.submit "Post", class: "round tiny button" %>
         <% end %>
-
+    </div>
   </aside>
 
 
+
   <div class="large-9 columns" role="content">
+    <div class="panel">
     <% unless current_user?(@user) %>
         <div id="follow_form">
           <% if current_user.following?(@user) %>
@@ -65,9 +68,10 @@
           <% end %>
         </div>
     <% end %>
+
     <h2>Rubys Riding TiY Rails</h2>
     <%= render 'shared/feed' %>
-
+    </div>
 
   </div>
 

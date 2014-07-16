@@ -3,10 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 body{
   background-image: url("homepage.jpg");
+  background-attachment: fixed;
 }
-.feed{
+.panel{
   background-image: url("crossword.png");
-
+  border-radius: 1%;
 }
 h2{
   font-family: 'Gloria Hallelujah', cursive;
