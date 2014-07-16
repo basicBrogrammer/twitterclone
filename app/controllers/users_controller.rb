@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    current_user
+
     @post = current_user.posts.build if sign_in?
     @feed_items = current_user.feed.page params[:page]
 
